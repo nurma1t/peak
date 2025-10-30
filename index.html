@@ -13,25 +13,57 @@
       margin: 0;
       padding: 0;
     }
+
     header {
       padding: 40px 20px;
-      background-color: rgba(0,0,0,0.3);
+      background-color: rgba(0, 0, 0, 0.3);
+      position: relative;
     }
-    header img {
+
+    header img.logo {
       width: 120px;
       border-radius: 50%;
     }
+
     h1 {
       font-size: 2.5em;
       margin: 10px 0;
       letter-spacing: 2px;
     }
+
+    /* Instagram icon */
+    .insta-link {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+
+    .insta-link:hover {
+      transform: scale(1.1);
+    }
+
+    .insta-link svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+
     .bio {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
       padding: 30px;
     }
+
     .member {
       background-color: rgba(255,255,255,0.1);
       padding: 20px;
@@ -39,18 +71,22 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       transition: transform 0.3s;
     }
+
     .member:hover {
       transform: scale(1.05);
       background-color: rgba(255,255,255,0.15);
     }
+
     h2 {
       color: #bbdefb;
     }
+
     a {
       color: #90caf9;
       text-decoration: none;
       font-weight: bold;
     }
+
     form {
       background: rgba(0,0,0,0.3);
       margin: 30px auto;
@@ -59,6 +95,7 @@
       width: 90%;
       max-width: 500px;
     }
+
     input, textarea {
       width: 90%;
       margin: 10px 0;
@@ -66,6 +103,7 @@
       border: none;
       border-radius: 10px;
     }
+
     button {
       background: #2196f3;
       color: white;
@@ -76,9 +114,11 @@
       cursor: pointer;
       transition: 0.3s;
     }
+
     button:hover {
       background: #1565c0;
     }
+
     .uploaded-item {
       background-color: rgba(255,255,255,0.15);
       margin: 10px auto;
@@ -87,6 +127,7 @@
       width: 90%;
       max-width: 600px;
     }
+
     footer {
       background: rgba(0,0,0,0.4);
       padding: 20px;
@@ -97,9 +138,13 @@
 <body>
 
   <header>
-    <img src="peak.jpg" alt="PEAK Logo">
+    <img src="peak.jpg" alt="PEAK Logo" class="logo">
+    <a class="insta-link" href="https://www.instagram.com/peak.2502?igsh=NjNyYmVsamppaXJu" target="_blank" title="Біздің Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66ZM400,80A48,48,0,0,0,352,32H96A48,48,0,0,0,48,80V432a48,48,0,0,0,48,48H352a48,48,0,0,0,48-48ZM224,338a82,82,0,1,1,82-82A82,82,0,0,1,224,338ZM370.67,144A26.67,26.67,0,1,1,344,117.33,26.66,26.66,0,0,1,370.67,144Z"/>
+      </svg>
+    </a>
     <h1>PEAK Portfolio</h1>
-    <p><a href="https://www.instagram.com/peak.2502?igsh=NjNyYmVsamppaXJu" target="_blank">Бізді Instagram-да бақылаңыз 📸</a></p>
   </header>
 
   <section class="bio">
