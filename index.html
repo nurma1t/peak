@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PEAK Portfolio</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      padding: 40px 20px;
+      background-color: rgba(0,0,0,0.3);
+    }
+    header img {
+      width: 120px;
+      border-radius: 50%;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin: 10px 0;
+      letter-spacing: 2px;
+    }
+    .bio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+    .member {
+      background-color: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+    .member:hover {
+      transform: scale(1.05);
+      background-color: rgba(255,255,255,0.15);
+    }
+    h2 {
+      color: #bbdefb;
+    }
+    a {
+      color: #90caf9;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    form {
+      background: rgba(0,0,0,0.3);
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+    }
+    input, textarea {
+      width: 90%;
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+    }
+    button {
+      background: #2196f3;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #1565c0;
+    }
+    .uploaded-item {
+      background-color: rgba(255,255,255,0.15);
+      margin: 10px auto;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+    }
+    footer {
+      background: rgba(0,0,0,0.4);
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="peak.jpg" alt="PEAK Logo">
+    <h1>PEAK Portfolio</h1>
+    <p><a href="https://www.instagram.com/peak.2502?igsh=NjNyYmVsamppaXJu" target="_blank">Бізді Instagram-да бақылаңыз 📸</a></p>
+  </header>
+
+  <section class="bio">
+    <div class="member">
+      <h2>Камал Нурмат</h2>
+      <p>Басты презентация жасаушы және сайттың негізгі әзірлеушісі. Креативті идеялардың авторы.</p>
+    </div>
+    <div class="member">
+      <h2>Сайлаубеков Ануар</h2>
+      <p>Жасанды интеллект саласын меңгерген, AI бейнелерін жасайды және командаға техқолдау көрсетеді.</p>
+    </div>
+    <div class="member">
+      <h2>Макажан Асылкеней</h2>
+      <p>Бейнелердің монтажшысы және дыбыстаушы. Команда бейнелерін кәсіби деңгейде жасайды.</p>
+    </div>
+    <div class="member">
+      <h2>Те Валерий</h2>
+      <p>AI видеоларын өңдейді және монтаждауға көмектеседі. Техникалық шеберлігі жоғары қатысушы.</p>
+    </div>
+    <div class="member">
+      <h2>Рауф Радбек</h2>
+      <p>Презентацияларды және контентті безендірумен айналысады. Эстетикалық талғамы жоғары.</p>
+    </div>
+  </section>
+
+  <h2>📤 Өз жұмыстарыңызды жүктеңіз</h2>
+  <form id="uploadForm">
+    <input type="text" id="name" placeholder="Атыңыз" required><br>
+    <input type="text" id="title" placeholder="Жұмыс атауы" required><br>
+    <textarea id="desc" placeholder="Қысқаша сипаттама"></textarea><br>
+    <input type="url" id="link" placeholder="Сілтеме (Google Drive, YouTube)" required><br>
+    <button type="submit">Жүктеу</button>
+  </form>
+
+  <h2>🗂 Барлық жүктелген жұмыстар</h2>
+  <div id="uploadedWorks"></div>
+
+  <footer>
+    <p>© 2025 PEAK Team | Құрылған Нурмат Камал және команда 🌟</p>
+  </footer>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbzhNNaYtlW1EFCbhpS49Zi1rTKwPmuyt_U3lR5k7ALlgy5b3WVgrgiuQCi9X3hGOoQD/exec";
+
+    const form = document.getElementById('uploadForm');
+    const list = document.getElementById('uploadedWorks');
+
+    async function loadWorks() {
+      list.innerHTML = "<em>Жүктелуде...</em>";
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      list.innerHTML = "";
+      data.reverse().forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add('uploaded-item');
+        div.innerHTML = `
+          <strong>${item.title}</strong> — ${item.name}<br>
+          ${item.desc ? `<em>${item.desc}</em><br>` : ""}
+          ${item.link ? `<a href="${item.link}" target="_blank">🔗 Қарау</a>` : ""}
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const title = document.getElementById('title').value;
+      const link = document.getElementById('link').value;
+      const desc = document.getElementById('desc').value;
+
+      await fetch(API_URL, {
+        method: "POST",
+        body: new URLSearchParams({ name, title, link, desc }),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      });
+
+      form.reset();
+      loadWorks();
+    });
+
+    loadWorks();
+  </script>
+</body>
+</html>
